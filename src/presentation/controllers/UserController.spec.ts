@@ -68,6 +68,22 @@ describe('User Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('age'))
   });
 
+  test('Should returns 400 if no weight is provider', () => {
+    const sut = new UserController();
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        phone_number: 3831839,
+        email: 'any_email@gmail',
+        age: 20
+
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('weight'))
+  });
 
 
 });
