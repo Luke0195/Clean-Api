@@ -36,5 +36,22 @@ describe('User Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('phone_number'))
   });
 
+  test('Should returns 400 if no email is provider', () => {
+    const sut = new UserController();
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        phone_number: 3831839,
+        age: 20,
+        weight: 1.80,
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('email'))
+  });
+
+
 
 });
